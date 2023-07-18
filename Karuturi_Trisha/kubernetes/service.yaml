@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: karuturi_trisha
+  labels:
+    app: karuturi_trisha
+  name: karuturi_trisha
+spec:
+  ports:
+  
+    - protocol: TCP
+      port: 9999
+      targetPort: 9999
+   
+   
+  selector:
+    app: karuturi_trisha
+  type: ClusterIP

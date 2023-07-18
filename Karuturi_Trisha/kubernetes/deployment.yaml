@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: karuturi_trisha
+  name: karuturi_trisha
+  labels:
+    app: karuturi_trisha
+spec:
+  selector:
+    matchLabels:
+      app: karuturi_trisha
+  template:
+    metadata:
+      labels:
+        app: karuturi_trisha
+        name: karuturi_trisha
+    spec:
+      containers:
+        - name: karuturi_trisha
+          image: sindhutrisha/Karuturi_Trisha/karuturi_trisha
+          imagePullPolicy: Always
+        
+          env:
+            - name: SERVICE_NAME
+              value: "go-app"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "localhost:4317"
+            - name: INSECURE_MODE
+              value: "true"
+        
+          ports:
+        
+        
+          - containerPort: 9999
+            name: http
+        
+        
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 30
+        
